@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/paypal_fx.rb",
+    "paypal_fx.gemspec",
     "test/helper.rb",
     "test/test_paypal_fx.rb"
   ]
