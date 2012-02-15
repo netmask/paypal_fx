@@ -1,6 +1,12 @@
 = paypal_fx
 
-Description goes here.
+fx = Devmask::PaypalFx.new(user_id: 'user',
+                      password: 'password',
+                      signature: 'sign',
+                      app_id: 'appid',
+                      test: true)
+
+puts   fx.convert "1.0","USD", "MXN"
 
 == Contributing to paypal_fx
  
