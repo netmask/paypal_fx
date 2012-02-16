@@ -6,7 +6,7 @@ require 'uri'
 
 class PaypalFx
 
-  SERVER = 'svcs.sandbox.paypal.com'
+  SERVER = 'svcs.paypal.com'
   SANDBOX = 'svcs.sandbox.paypal.com'
 
   CLIENT_INFO = { VERSION: '60.0', SOURCE: 'PayPalRubySDKV1.2.0' }
@@ -26,6 +26,10 @@ class PaypalFx
   end
 
   # Converts an amount from origin currency to destination
+  #
+  # @param amount [Float] amount
+  # @param origin [String] ISO Currency code
+  # @param destination [String] ISO Currency code
   def convert(amount, origin, destination)
     request = {
         'requestEnvelope.errorLanguage' => 'en_US',
@@ -68,11 +72,14 @@ class PaypalFx
   end
 
   protected
+  # Cleans the named spaced returns and converts the keys to symlinks
+  #
+  # @param hash [Hash] Paypal return hash
   def clean_namespace(hash)
     #i hate my self for this
     h = {}
     hash.each do |k, v|
-      val = k.split('.').map { |k| k.tr('^A-Za-z0-9', '') }
+      val = k.split('.').map { |s| s.tr('^A-Za-z0-9', '') }
       key = val.count == 2 ? val[1] : val[val.count-2..val.count-1].join('_')
       h[key.to_sym] = v[0]
     end
