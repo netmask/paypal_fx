@@ -12,3 +12,8 @@ group :development do
   gem "jeweler", "~> 1.8.3"
   gem "yard"
 end
+
+group :test do
+  gem "rspec"
+  gem "guard"
+end
